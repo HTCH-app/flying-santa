@@ -13,7 +13,7 @@ function App() {
     }}>
       <Canvas shadows camera={{ position: [0, 0, 150], fov: 40 }}>
       <Stage environment="city" intensity={0.6}>
-        <FlyingObject>
+        <FlyingObject position={[0,-20,0]}>
           <Santa scale={scale} />
         </FlyingObject>    
       </Stage>
