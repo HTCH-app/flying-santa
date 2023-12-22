@@ -1,8 +1,9 @@
 import React from "react";
 import { useGLTF } from "@react-three/drei";
 import shoeModel from './shoe.gltf'
+import { forwardRef } from "react";
 
-export default function Model(props) {
+function Model(props) {
   const { nodes, materials } = useGLTF(shoeModel);
   return (
     <group {...props} dispose={null}>
@@ -58,4 +59,6 @@ export default function Model(props) {
   );
 }
 
-useGLTF.preload("/shoe.gltf");
+useGLTF.preload(shoeModel);
+
+export default forwardRef((props, ref) => <Model {...props} ref={ref} />);
