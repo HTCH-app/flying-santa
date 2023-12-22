@@ -21,7 +21,7 @@ export default function FlyingObject({ children, bankStrength = 0.1 }) {
     const tangent = new Vector3(Math.cos(t), -Math.sin(t * 2) / 4, -Math.sin(t)).normalize();
 
     // Calculate the normal (banking axis)
-    const normal = new Vector3(0, 1, 0); // Assuming Y-up in your scene
+    const normal = new Vector3(1, 0, 0); // Assuming Y-up in your scene
 
     // Calculate the binormal
     const binormal = new Vector3().crossVectors(tangent, normal).normalize();
