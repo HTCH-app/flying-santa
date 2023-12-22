@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Vector3 } from 'three';
 import { useFrame } from '@react-three/fiber';
 
-export default function FlyingObject({ children, bankStrength = 0.1 }) {
+export default function FlyingObject({ children, bankStrength = 0.1,radius = 20 }) {
   const meshRef = useRef();
   const prevTangent = useRef(new Vector3());
 
@@ -10,9 +10,9 @@ export default function FlyingObject({ children, bankStrength = 0.1 }) {
     const t = state.clock.getElapsedTime();
 
     // Circular trajectory
-    const x = Math.sin(t) * 2;
-    const y = Math.cos(t * 2) / 2 + 1;
-    const z = Math.cos(t) * 2;
+    const x = Math.sin(t) * radius; // X-coordinate
+    const y = Math.cos(t * 2) / 2 + 1; // Y-coordinate (vertical motion)
+    const z = Math.cos(t) * radius; // Z-coordinate
 
     // Update position
     meshRef.current.position.set(x, y, z);
