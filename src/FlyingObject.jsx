@@ -21,7 +21,7 @@ export default function FlyingObject({ children, bankStrength = 0.1 }) {
     const tangent = new Vector3(Math.cos(t), -Math.sin(t * 2) / 4, -Math.sin(t)).normalize();
 
     // Calculate the normal (banking axis)
-    const normal = new Vector3(1, 0, 0); // Assuming Y-up in your scene
+    const normal = new Vector3(1, 0, 0);
 
     // Calculate the binormal
     const binormal = new Vector3().crossVectors(tangent, normal).normalize();
@@ -32,8 +32,11 @@ export default function FlyingObject({ children, bankStrength = 0.1 }) {
     // Determine the direction of the banking
     const direction = Math.sign(prevTangent.current.cross(tangent).dot(normal));
 
-    // Set the quaternion of the mesh to align with the tangent and normal vectors
-    meshRef.current.quaternion.setFromUnitVectors(new Vector3(1, 0, 0), tangent);
+    // Model's assumed forward direction (adjust this as needed)
+    const modelForward = new Vector3(-1, 0, 0); // Change this to match your model's forward direction
+
+    // Set the quaternion of the mesh to align with the tangent and model's forward direction
+    meshRef.current.quaternion.setFromUnitVectors(modelForward, tangent);
 
     // Apply the banking rotation around the binormal axis
     meshRef.current.rotateOnAxis(binormal, angle * direction * bankStrength);
